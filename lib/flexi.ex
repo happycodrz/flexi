@@ -1,18 +1,53 @@
 defmodule Flexi do
-  @moduledoc """
-  Documentation for Flexi.
+  @doc """
+  :matchfile
   """
+  def matchfile(pattern \\ "") do
+    files = pattern |> Flexirunner.File.matchingfiles()
+
+    run([trace: true], fn ->
+      files |> Enum.each(&reload/1)
+    end)
+  end
 
   @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Flexi.hello()
-      :world
-
+  :matchname
   """
-  def hello do
-    :world
+  def matchname(pattern \\ "") do
+    {only_test_ids, files} = pattern |> Flexirunner.Name.as_exunit_opts()
+    opts = [trace: true, only_test_ids: only_test_ids]
+
+    run(opts, fn ->
+      files |> Enum.each(&reload/1)
+    end)
+  end
+
+  @doc """
+  :matchmodule
+  """
+  def matchmodule(pattern \\ "") do
+    files = pattern |> Flexirunner.Module.get()
+
+    run([trace: true], fn ->
+      files |> Enum.each(&reload/1)
+    end)
+  end
+
+  def run(opts, fun) do
+    ExUnit.start(opts)
+    fun.()
+    task = Task.async(ExUnit, :run, [])
+    test_modules_loaded()
+    Task.await(task, :infinity)
+  end
+
+  if function_exported?(ExUnit.Server, :cases_loaded, 0) do
+    defp test_modules_loaded, do: ExUnit.Server.cases_loaded()
+  else
+    defp test_modules_loaded, do: ExUnit.Server.modules_loaded()
+  end
+
+  defp reload(file) do
+    Cortex.Reloader.reload_file(file)
   end
 end
