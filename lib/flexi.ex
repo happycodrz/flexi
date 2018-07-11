@@ -3,7 +3,7 @@ defmodule Flexi do
   :matchfile
   """
   def matchfile(pattern \\ "") do
-    files = pattern |> Flexirunner.File.matchingfiles()
+    files = pattern |> Flexi.File.matchingfiles()
 
     run([trace: true], fn ->
       files |> Enum.each(&reload/1)
@@ -14,7 +14,7 @@ defmodule Flexi do
   :matchname
   """
   def matchname(pattern \\ "") do
-    {only_test_ids, files} = pattern |> Flexirunner.Name.as_exunit_opts()
+    {only_test_ids, files} = pattern |> Flexi.Name.as_exunit_opts()
     opts = [trace: true, only_test_ids: only_test_ids]
 
     run(opts, fn ->
@@ -26,9 +26,10 @@ defmodule Flexi do
   :matchmodule
   """
   def matchmodule(pattern \\ "") do
-    files = pattern |> Flexirunner.Module.get()
+    {only_test_ids, files} = pattern |> Flexi.Module.as_exunit_opts()
+    opts = [trace: true, only_test_ids: only_test_ids]
 
-    run([trace: true], fn ->
+    run(opts, fn ->
       files |> Enum.each(&reload/1)
     end)
   end

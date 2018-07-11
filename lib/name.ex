@@ -1,4 +1,4 @@
-defmodule Flexirunner.Name do
+defmodule Flexi.Name do
   def as_exunit_opts(pattern \\ "") do
     cases = pattern |> matchingcases()
 
@@ -14,6 +14,7 @@ defmodule Flexirunner.Name do
       |> Enum.map(fn testcase ->
         testcase |> Map.get(:tags) |> Map.get(:file)
       end)
+      |> Enum.uniq
 
     {opts, files}
   end
