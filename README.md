@@ -3,6 +3,26 @@
 A flexible Elixir Mix test runner.
 
 
+## Usage
+
+
+```elixir
+# grepping based on file names
+iex> Flexi.filematch("")
+```
+
+
+```elixir
+# grepping based on test names
+iex> Flexi.namematch("")
+```
+
+
+```elixir
+# grepping based on test module names
+iex> Flexi.modulematch("")
+```
+
 
 ## Requirements:
 
