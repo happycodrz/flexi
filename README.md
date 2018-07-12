@@ -5,6 +5,12 @@ A flexible Elixir Mix test runner.
 
 ## Usage
 
+Start your IEx console in test mode:
+```bash
+$ MIX_ENV=test iex -S mix
+```
+
+First load / execute all test modules with an empty query:
 
 ```elixir
 # grepping based on file names
