@@ -1,8 +1,8 @@
 defmodule Flexi do
   @doc """
-  :matchfile
+  :filematch
   """
-  def matchfile(pattern \\ "") do
+  def filematch(pattern \\ "") do
     files = pattern |> Flexi.File.matchingfiles()
 
     run([trace: true], fn ->
@@ -11,9 +11,9 @@ defmodule Flexi do
   end
 
   @doc """
-  :matchname
+  :namematch
   """
-  def matchname(pattern \\ "") do
+  def namematch(pattern \\ "") do
     {only_test_ids, files} = pattern |> Flexi.Name.as_exunit_opts()
     opts = [trace: true, only_test_ids: only_test_ids]
 
@@ -23,9 +23,9 @@ defmodule Flexi do
   end
 
   @doc """
-  :matchmodule
+  :modulematch
   """
-  def matchmodule(pattern \\ "") do
+  def modulematch(pattern \\ "") do
     {only_test_ids, files} = pattern |> Flexi.Module.as_exunit_opts()
     opts = [trace: true, only_test_ids: only_test_ids]
 
