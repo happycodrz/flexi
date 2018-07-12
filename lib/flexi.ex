@@ -1,6 +1,6 @@
 defmodule Flexi do
   @doc """
-  :filematch
+  grep tests by pattern matching file names
   """
   def filematch(pattern \\ "") do
     files = pattern |> Flexi.File.matchingfiles()
@@ -11,7 +11,7 @@ defmodule Flexi do
   end
 
   @doc """
-  :namematch
+  grep tests by pattern matching test names
   """
   def namematch(pattern \\ "") do
     {only_test_ids, files} = pattern |> Flexi.Name.as_exunit_opts()
@@ -23,7 +23,7 @@ defmodule Flexi do
   end
 
   @doc """
-  :modulematch
+  grep tests by pattern matching module names
   """
   def modulematch(pattern \\ "") do
     {only_test_ids, files} = pattern |> Flexi.Module.as_exunit_opts()
@@ -34,6 +34,9 @@ defmodule Flexi do
     end)
   end
 
+  @doc """
+  generic function to execute tests with some desired parameters
+  """
   def run(opts, fun) do
     ExUnit.start(opts)
     fun.()

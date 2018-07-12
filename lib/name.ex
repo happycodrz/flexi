@@ -1,4 +1,7 @@
 defmodule Flexi.Name do
+  @moduledoc """
+  functions related to filtering by test name
+  """
   alias Flexi.Common
   def as_exunit_opts(pattern \\ "") do
     cases = pattern |> matchingcases()

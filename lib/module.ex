@@ -1,4 +1,7 @@
 defmodule Flexi.Module do
+  @moduledoc """
+  functions related to filtering by module name
+  """
   alias Flexi.Common
 
   def as_exunit_opts(pattern \\ "") do
