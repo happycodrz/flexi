@@ -4,7 +4,7 @@ defmodule Flexi.Module do
   def as_exunit_opts(pattern \\ "") do
     modules = matching_modules(pattern)
     cases = Common.collect_cases(modules)
-    opts = Flexi.Common.exunit_opts_from_cases(cases)
+    opts = Common.exunit_opts_from_cases(cases)
 
     files =
       cases

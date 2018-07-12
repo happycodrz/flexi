@@ -1,17 +1,18 @@
 defmodule FlexiRealTest do
   use ExUnit.Case
   import Mockery
+  alias Flexi.Common
 
   test "no tests" do
     mock(Flexi.CommonMockable, :testmodules, [])
-    assert Flexi.Common.testcases() == []
+    assert Common.testcases() == []
   end
 
   test "2 modules" do
     mock(Flexi.CommonMockable, :testmodules, [FlexiTest, FlexiTest2])
-    assert Flexi.Common.testcases() |> Enum.count() == 7
+    assert Common.testcases() |> Enum.count() == 7
 
-    assert Flexi.Common.testcases() |> Enum.map(fn x -> x.name end) == [
+    assert Common.testcases() |> Enum.map(fn x -> x.name end) == [
              :"test third one",
              :"test second one",
              :"test first one",
