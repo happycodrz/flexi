@@ -10,8 +10,7 @@ defmodule Flexi.Common do
   end
 
   @doc """
-  all discovereable test modules
-  this is mocked in tests for easier testing
+  all discoverable test modules (mocked in tests for easier testing)
   """
   def testmodules do
     mockable(CommonMockable).testmodules()
