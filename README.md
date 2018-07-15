@@ -56,6 +56,5 @@ be found at [https://hexdocs.pm/flexi](https://hexdocs.pm/flexi).
 ## Future ideas:
   - combining different types of filters, like module + name
   - debug mode / more logging (?)
-  - remove the Cortex.Reloader dependency
   - make Flexi part of [Cortex](https://github.com/urbint/cortex/commits/master), so it would re-run tests that match the query,
     because the current implementation for `Cortex.focus` is not useful at all :(
