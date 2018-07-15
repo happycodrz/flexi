@@ -2,8 +2,6 @@ defmodule Flexi.Common do
   @moduledoc """
   shared functions
   """
-  import Mockery.Macro
-  alias Flexi.CommonMockable
 
   def testcases do
     testmodules() |> collect_cases()
@@ -13,7 +11,11 @@ defmodule Flexi.Common do
   all discoverable test modules (mocked in tests for easier testing)
   """
   def testmodules do
-    mockable(CommonMockable).testmodules()
+    realmodule().testmodules()
+  end
+
+  defp realmodule do
+    Application.get_env(:flexi, :realmodule, Flexi.CommonMockable)
   end
 
   def collect_cases(modules) do

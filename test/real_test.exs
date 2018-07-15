@@ -1,15 +1,27 @@
 defmodule FlexiRealTest do
   use ExUnit.Case
-  import Mockery
   alias Flexi.Common
 
+  defmodule EmptyRes do
+    def testmodules do
+      []
+    end
+  end
+
+  defmodule TwoModules do
+    def testmodules do
+      [FlexiTest, FlexiTest2]
+    end
+  end
+
   test "no tests" do
-    mock(Flexi.CommonMockable, :testmodules, [])
+    Application.put_env(:flexi, :realmodule, EmptyRes)
     assert Common.testcases() == []
+    Application.delete_env(:flexi, :realmodule)
   end
 
   test "2 modules" do
-    mock(Flexi.CommonMockable, :testmodules, [FlexiTest, FlexiTest2])
+    Application.put_env(:flexi, :realmodule, TwoModules)
     assert Common.testcases() |> Enum.count() == 7
 
     assert Common.testcases() |> Enum.map(fn x -> x.name end) == [
@@ -21,6 +33,8 @@ defmodule FlexiRealTest do
              :"test second one",
              :"test first one"
            ]
+
+    Application.delete_env(:flexi, :realmodule)
   end
 
   describe "Flexi.File" do
@@ -33,14 +47,15 @@ defmodule FlexiRealTest do
 
   describe "Flexi.Module" do
     test "matching_modules" do
-      mock(Flexi.CommonMockable, :testmodules, [FlexiTest, FlexiTest2])
+      Application.put_env(:flexi, :realmodule, TwoModules)
       assert Flexi.Module.matching_modules("2") == [FlexiTest2]
       assert Flexi.Module.matching_modules("FlexiTest") == [FlexiTest, FlexiTest2]
       assert Flexi.Module.matching_modules("") == [FlexiTest, FlexiTest2]
+      Application.delete_env(:flexi, :realmodule)
     end
 
     test "as_exunit_opts" do
-      mock(Flexi.CommonMockable, :testmodules, [FlexiTest, FlexiTest2])
+      Application.put_env(:flexi, :realmodule, TwoModules)
 
       assert Flexi.Module.as_exunit_opts("2") |> elem(0) ==
                MapSet.new([
@@ -60,6 +75,8 @@ defmodule FlexiRealTest do
                  {FlexiTest2, :"test second one"},
                  {FlexiTest2, :"test third one"}
                ])
+
+      Application.delete_env(:flexi, :realmodule)
     end
   end
 end
