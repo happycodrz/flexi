@@ -39,9 +39,9 @@ defmodule FlexiRealTest do
 
   describe "Flexi.File" do
     test "matchingfiles" do
-      assert Flexi.File.matchingfiles("real") == ["test/real_test.exs"]
-      assert Flexi.File.matchingfiles("") == ["test/flexi_test.exs", "test/real_test.exs"]
-      assert Flexi.File.matchingfiles("flexi") == ["test/flexi_test.exs"]
+      assert Flexi.File.matchingfiles("real") == ["test/test_helper.exs", "test/real_test.exs"]
+      assert Flexi.File.matchingfiles("") == ["test/test_helper.exs", "test/flexi_test.exs", "test/real_test.exs"]
+      assert Flexi.File.matchingfiles("flexi") == ["test/test_helper.exs", "test/flexi_test.exs"]
     end
   end
 

@@ -13,6 +13,7 @@ defmodule Flexi.Name do
         testcase |> Map.get(:tags) |> Map.get(:file)
       end)
       |> Enum.uniq()
+      |> Common.with_testhelpers()
 
     {opts, files}
   end
