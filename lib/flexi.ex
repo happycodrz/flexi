@@ -1,4 +1,5 @@
 defmodule Flexi do
+  alias Flexi.Reloader
   @doc """
   grep tests by pattern matching file names
   """
@@ -52,6 +53,6 @@ defmodule Flexi do
   end
 
   defp reload(file) do
-    Cortex.Reloader.reload_file(file)
+    Reloader.reload_file(file)
   end
 end
