@@ -39,6 +39,13 @@ defmodule Flexi do
   end
 
   @doc """
+  convenient function to print ExUnit configuration
+  """
+  def config() do
+    ExUnit.configuration()
+  end
+
+  @doc """
   generic function to execute tests with some desired parameters
   """
   def run(opts, fun) do
