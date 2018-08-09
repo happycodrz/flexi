@@ -1,6 +1,6 @@
 # Flexi
 
-A flexible Elixir Mix test runner.
+A flexible Elixir Mix test runner. (>= Elixir 1.7)
 
 
 ## Usage
