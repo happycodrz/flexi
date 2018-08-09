@@ -1,3 +1,7 @@
+0.4.1 (2018/08/09)
+  - `Flexi.config` as delegation to `ExUnit.configuration`
+
+
 0.4.0 (2018/08/09)
   - drop sticky filters before running `filematch`
   - try to detect that test files were not loaded and pro-actively load them via `filematch("")` call
