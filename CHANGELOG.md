@@ -1,3 +1,7 @@
+0.4.2 (2018/08/09)
+  - filtering is case-insensitive now
+
+
 0.4.1 (2018/08/09)
   - `Flexi.config` as delegation to `ExUnit.configuration`
 
