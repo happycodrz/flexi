@@ -30,6 +30,7 @@ defmodule Flexi.Module do
   end
 
   defp matches?(module, pattern) do
+    pattern = pattern |> String.downcase()
     module
     |> Atom.to_string()
     |> String.downcase()

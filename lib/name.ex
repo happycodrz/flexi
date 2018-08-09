@@ -3,6 +3,7 @@ defmodule Flexi.Name do
   functions related to filtering by test name
   """
   alias Flexi.Common
+
   def as_exunit_opts(pattern \\ "") do
     cases = pattern |> matchingcases()
     opts = Common.exunit_opts_from_cases(cases)
@@ -19,9 +20,11 @@ defmodule Flexi.Name do
   end
 
   def matchingcases(pattern \\ "") do
+    pattern = pattern |> String.downcase()
+
     Common.testcases()
     |> Enum.filter(fn testcase ->
-      testcase.name |> Atom.to_string() |> String.contains?(pattern)
+      testcase.name |> Atom.to_string() |> String.downcase() |> String.contains?(pattern)
     end)
   end
 end
