@@ -5,6 +5,7 @@ defmodule Flexi do
   """
   def filematch(pattern \\ "") do
     files = pattern |> Flexi.File.matchingfiles()
+    ExUnit.configure [only_test_ids: nil] # this removes the filters from (possible) previous runs
 
     run([trace: true], fn ->
       files |> Enum.each(&reload/1)
