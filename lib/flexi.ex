@@ -17,6 +17,7 @@ defmodule Flexi do
   """
   def namematch(pattern \\ "") do
     {only_test_ids, files} = pattern |> Flexi.Name.as_exunit_opts()
+    load_all_modules_if_needed(files)
     opts = [trace: true, only_test_ids: only_test_ids]
 
     run(opts, fn ->
@@ -29,6 +30,7 @@ defmodule Flexi do
   """
   def modulematch(pattern \\ "") do
     {only_test_ids, files} = pattern |> Flexi.Module.as_exunit_opts()
+    load_all_modules_if_needed(files)
     opts = [trace: true, only_test_ids: only_test_ids]
 
     run(opts, fn ->
@@ -55,5 +57,14 @@ defmodule Flexi do
 
   defp reload(file) do
     Reloader.reload_file(file)
+  end
+
+  defp load_all_modules_if_needed(files) do
+    if files == [] do
+      if Flexi.Name.as_exunit_opts("") |> elem(1) == [] do
+        IO.puts "******* You have no test files in memory yet, dropping filter get load them all ***********"
+        filematch()
+      end
+    end
   end
 end
