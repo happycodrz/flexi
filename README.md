@@ -10,28 +10,34 @@ Start your IEx console in test mode:
 $ MIX_ENV=test iex -S mix
 ```
 
-First load / execute all test modules with an empty query:
+
+Now we can start running tests depending on our desires.
+First run with a fresh Erlang VM will run all tests to load the modules into memory, this happens implicitly.
+
+Grep for file names:
 
 ```elixir
-# grepping based on file names
 iex> Flexi.filematch("")
 ```
 
 
+Grep for test names:
+
 ```elixir
-# grepping based on test names
 iex> Flexi.namematch("")
 ```
 
 
+Grep for test module names:
+
 ```elixir
-# grepping based on test module names
 iex> Flexi.modulematch("")
 ```
 
 
+Show current filters for ExUnit (convenience function):
+
 ```elixir
-# show current filters for ExUnit (convenience function)
 iex> Flexi.config()
 ```
 
